@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiona Zhang | Growth & Value Creation</title>
+    <style>
+        :root {
+            --primary: #0052cc; /* 专业、信任的蓝 */
+            --energy: #fbbf24;  /* 琥珀能量橙 */
+            --morandi-bg: #f5f7f9; /* 基调莫兰迪灰 */
+            --text-main: #334155; /* 柔和的深灰文字 */
+            --text-light: #64748b; /* 浅灰文字 */
+            --card-shadow: 0 15px 35px -15px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        
+        /* === 艺术感高级背景设计 === */
+        body { 
+            background-color: var(--morandi-bg); 
+            color: var(--text-main); 
+            line-height: 1.8; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景上的动态艺术光斑 */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px); /* 柔焦效果 */
+            z-index: -1; /* 确保在内容下方 */
+            opacity: 0.5; /* 半透明 */
+            transition: transform 0.5s ease-out; /* 用于视差效果 */
+        }
+
+        /* 左上角：淡粉色光斑（象征修丽可/艺术感） */
+        body::before {
+            width: 400px;
+            height: 400px;
+            background-color: #fce7f3; /* very light pink */
+            top: -100px;
+            left: -100px;
+        }
+
+        /* 右下角：淡蓝色光斑（象征莫纳什/商业严谨） */
+        body::after {
+            width: 500px;
+            height: 500px;
+            background-color: #e0f2fe; /* very light blue */
+            bottom: -150px;
+            right: -150px;
+        }
+
+        /* 顶部磁吸导航 (调整为半透明背景，融合高级背景) */
+        header { background: rgba(245, 247, 249, 0.85); backdrop-filter: blur(15px); position: fixed; top: 0; width: 100%; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links li { cursor: pointer; font-weight: 600; transition: 0.3s; color: var(--text-light); font-size: 0.85rem; position: relative; text-transform: uppercase; letter-spacing: 1.2px; }
+        .nav-links li:hover, .nav-links li.active { color: var(--primary); }
+        .nav-links li.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--primary); }
+
+        main { max-width: 900px; margin: 120px auto 80px; padding: 0 25px; position: relative; z-index: 10; /* 内容层级提高 */ }
+
+        /* 内容板块动画 */
+        .section { display: none; animation: slideUpIn 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+        .section.active { display: block; }
+        @keyframes slideUpIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 卡片设计 (增加柔和度，配合背景) */
+        .hero-card { text-align: center; padding: 4rem 1rem; border-radius: 28px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); box-shadow: var(--card-shadow); margin-bottom: 3rem; border: 1px solid rgba(255,255,255,0.3); }
+        .avatar-wrap { width: 135px; height: 135px; margin: 0 auto 2rem; border-radius: 50%; padding: 6px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border: 2px dashed #cbd5e1; animation: rotateContinuous 25s linear infinite; }
+        @keyframes rotateContinuous { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .avatar-circle { width: 100%; height: 100%; border-radius: 50%; background: #f1f5f9; overflow: hidden; transform: rotate(0deg); /* 抵消不需要，直接顺时针转就好 */ }
+        .avatar-circle img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+        .motto { font-style: italic; color: var(--primary); font-size: 1.1rem; margin: 1.2rem 0; font-weight: 300; }
+        
+        .traits { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 1.8rem; }
+        .trait-tag { padding: 7px 20px; border-radius: 50px; background: rgba(255,255,255,0.6); color: var(--text-light); font-size: 0.8rem; transition: 0.4s; cursor: default; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+        .trait-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); box-shadow: 0 5px 10px rgba(0,82,204,0.2); }
+
+        .card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 24px; padding: 2.8rem; margin-bottom: 2rem; box-shadow: var(--card-shadow); border: 1px solid rgba(255,255,255,0.3); }
+        h2 { font-size: 1.6rem; margin-bottom: 2.5rem; color: #0f172a; position: relative; }
+        h2::after { content: ''; position: absolute; left: 0; bottom: -8px; width: 45px; height: 4px; background: var(--energy); border-radius: 2px; }
+
+        .exp-item { border-left: 2px solid #e2e8f0; padding-left: 2.2rem; margin-bottom: 3.5rem; position: relative; }
+        .exp-item::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 4px rgba(0,82,204,0.1); }
+        .exp-title { font-weight: 700; font-size: 1.15rem; color: var(--primary); }
+        .exp-meta { font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500; }
+
+        .video-box { width: 100%; border-radius: 20px; background: #000; margin: 1.8rem 0; overflow: hidden; position: relative; aspect-ratio: 16/9; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .video-box video { width: 100%; height: 100%; }
+        .video-label { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.6); color: white; padding: 5px 15px; border-radius: 5px; font-size: 0.7rem; font-weight: 500; }
+
+        .skill-row { margin-bottom: 1.8rem; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
+        .skill-track { height: 9px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+        .skill-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--energy)); width: 0; transition: 2s cubic-bezier(0.1, 0, 0.2, 1); }
+
+        .footer-claim { text-align: center; padding: 5rem 1rem; color: #94a3b8; font-size: 0.85rem; position: relative; z-index: 10; }
+        .energy-btn { background: var(--primary); color: white; padding: 14px 36px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; transition: 0.4s; margin-top: 1.5rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .energy-btn:hover { background: var(--energy); color: #000; transform: translateY(-4px); box-shadow: 0 12px 25px rgba(251,191,36,0.3); }
+
+        .edit-mode [contenteditable="true"] { outline: 2px dashed var(--energy); background: rgba(251, 191, 36, 0.05); }
+        .edit-toggle-btn { position: fixed; bottom: 25px; right: 25px; background: rgba(30,41,59,0.8); backdrop-filter: blur(5px); color: white; padding: 12px 24px; border-radius: 50px; border: none; cursor: pointer; z-index: 1000; font-size: 0.8rem; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        @media (max-width: 600px) { .nav-links { display: none; } .card { padding: 1.8rem; } .trait-tag { padding: 6px 15px; font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+
+    <button class="edit-toggle-btn" onclick="toggleEditMode()" id="editToggle">Enable Edit Mode</button>
+
+    <header>
+        <nav>
+            <div style="font-weight: 900; color: var(--primary); letter-spacing: 2px;">FIONA.Z</div>
+            <ul class="nav-links">
+                <li class="active" onclick="showTab('home')">Purpose</li>
+                <li onclick="showTab('projects')">Impact</li>
+                <li onclick="showTab('marketing')">Creative</li>
+                <li onclick="showTab('growth')">Growth</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="editableContent">
+        <section id="home" class="section active">
+            <div class="hero-card">
+                <div class="avatar-wrap">
+                    <div class="avatar-circle"><img id="avatar" src=""></div>
+                </div>
+                <h1 contenteditable="false" style="font-size: 2.4rem; letter-spacing: -1px;">Fiona Zhang</h1>
+                <p class="motto" contenteditable="false">"Evolving through learning, creating irreplaceable value through execution."</p>
+                <div class="traits">
+                    <span class="trait-tag" contenteditable="false">🚀 Self-Disciplined</span>
+                    <span class="trait-tag" contenteditable="false">📚 Lifelong Learner</span>
+                    <span class="trait-tag" contenteditable="false">🎨 Creative Executor</span>
+                    <span class="trait-tag" contenteditable="false">🤝 Value Driven</span>
+                </div>
+                <button class="energy-btn" onclick="showTab('projects')">Explore My Energy →</button>
+            </div>
+
+            <div class="card">
+                <h2 contenteditable="false">Professional Creed</h2>
+                <p contenteditable="false">I believe that "Hard Work" is not just a sentiment, but the ability to solve complex problems. Through my dual Master’s at Monash and professional journey in Australia, I have maintained a high-frequency learning pace. Whether managing large-scale events from scratch or building high-impact brand IPs, I strive for commercial growth and tangible results.</p>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="card">
+                <h2 contenteditable="false">Event Planning & Curating</h2>
+                <div class="exp-item">
+                    <div class="exp-title" contenteditable="false">Shede Vintage Baijiu Festival & Launch Event</div>
+                    <div class="exp-meta" contenteditable="false">CG Liquor | National Event Lead</div>
+                    <p contenteditable="false">Independently managed end-to-end logistics including venue selection, exhibitor coordination, and on-site operation for national-scale brand events in Sydney.</p>
+                    <div class="video-box">
+                        <video controls src="shede_event.mp4"></video>
+                        <div class="video-label">Watch Highlight Reel</div>
+                    </div>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-title" contenteditable="false">Good Food & Wine Show / Aus-China Expo</div>
+                    <div class="exp-meta" contenteditable="false">Curating & Sales | Top 2 Performer</div>
+                    <p contenteditable="false">Drove massive traffic and conversion through interactive marketing strategies. Achieved <strong>Top 2 Sales</strong> within the team by blending product expertise with high-energy engagement.</p>
+                    <div class="video-box">
+                        <video controls src="interaction_wheel.mp4"></video>
+                        <div class="video-label">Interaction Moment</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="marketing" class="section">
+            <div class="card">
+                <h2 contenteditable="false">Creative Marketing & IP Empowerment</h2>
+                <div class="exp-item">
+                    <div class="exp-title" contenteditable="false">Exclusive Distributor IP Branding</div>
+                    <p contenteditable="false">Developed high-engagement content scripts, lead filming, and post-production editing to build professional authority and personal IP for brand representatives.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                        <div class="video-box" style="aspect-ratio: 9/16;">
+                            <video controls src="ip_video1.mp4"></video>
+                            <div class="video-label">IP Content Case A</div>
+                        </div>
+                        <div class="video-box" style="aspect-ratio: 9/16;">
+                            <video controls src="ip_video2.mp4"></video>
+                            <div class="video-label">IP Content Case B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="growth" class="section">
+            <div class="card">
+                <h2 contenteditable="false">The Journey of Self-Evolution</h2>
+                <div class="exp-item">
+                    <div class="exp-title" contenteditable="false">Monash University</div>
+                    <div class="exp-meta" contenteditable="false">Master of Global Business & Management | Dean's List</div>
+                    <p contenteditable="false">Bridging academic excellence with large-scale event execution and sustainable HR management practices.</p>
+                </div>
+                <div class="exp-item">
+                    <div class="exp-title" contenteditable="false">Jiangsu Province Startup Project</div>
+                    <div class="exp-meta" contenteditable="false">Project Lead | $20,000 Govt. Funding</div>
+                    <p contenteditable="false">My first realization of value creation, proving the unity of business logic and relentless execution.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 contenteditable="false">Skill Energy Levels (Loading...)</h2>
+                <div class="skill-row">
+                    <div class="skill-info" contenteditable="false"><span>Event Strategy & Coordination</span><span>98%</span></div>
+                    <div class="skill-track"><div class="skill-fill" data-width="98%"></div></div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info" contenteditable="false"><span>Video Production & IP Operations</span><span>95%</span></div>
+                    <div class="skill-track"><div class="skill-fill" data-width="95%"></div></div>
+                </div>
+                <div class="skill-row">
+                    <div class="skill-info" contenteditable="false"><span>Cross-Cultural Marketing</span><span>92%</span></div>
+                    <div class="skill-track"><div class="skill-fill" data-width="92%"></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="footer-claim">
+        <p contenteditable="false">Thank you for your attention | Believe in the power of effort</p>
+        <p style="margin-top: 10px;" contenteditable="false">Contact: zhangxiaowan0606@gmail.com</p>
+    </div>
+
+    <script>
+        // 性格化交互：当滚动时，光斑会极细微地视差移动，增加艺术感
+        window.addEventListener('scroll', function() {
+            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            // 视差系数 20px
+            const move = scrollPercent * 20; 
+            document.documentElement.style.setProperty('--scroll-move', `${move}px`);
+        });
+
+        // 栏目切换逻辑
+        function showTab(tabId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            
+            const navItems = document.querySelectorAll('.nav-links li');
+            const map = {'home':0, 'projects':1, 'marketing':2, 'growth':3};
+            navItems[map[tabId]].classList.add('active');
+            
+            if(tabId === 'growth') {
+                setTimeout(() => {
+                    document.querySelectorAll('.skill-fill').forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }, 300);
+            } else {
+                document.querySelectorAll('.skill-fill').forEach(bar => bar.style.width = '0');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 切换编辑模式
+        function toggleEditMode() {
+            const body = document.body;
+            const btn = document.getElementById('editToggle');
+            const editables = document.querySelectorAll('[contenteditable]');
+            
+            if (body.classList.contains('edit-mode')) {
+                body.classList.remove('edit-mode');
+                editables.forEach(el => el.contentEditable = "false");
+                btn.innerText = "Enable Edit Mode";
+                alert("Changes locked temporarily!");
+            } else {
+                body.classList.add('edit-mode');
+                editables.forEach(el => el.contentEditable = "true");
+                btn.innerText = "Disable & Lock Changes";
+            }
+        }
+
+        (function initAvatar() {
+            const exts = ['png', 'jpg', 'jpeg'];
+            const img = document.getElementById('avatar');
+            function tryLoad(i) {
+                if(i >= exts.length) return;
+                const src = `avatar.${exts[i]}`;
+                const temp = new Image();
+                temp.src = src;
+                temp.onload = () => { img.src = src; img.style.display = 'block'; };
+                temp.onerror = () => tryLoad(i+1);
+            }
+            tryLoad(0);
+        })();
+
+        document.querySelectorAll('video').forEach(v => {
+            v.onerror = function() {
+                this.parentNode.innerHTML = `<div style="padding:20px; text-align:center; color:#94a3b8; border:2px dashed rgba(0,0,0,0.05); border-radius:15px;">[ Video Pending: ${this.getAttribute('src')} ]</div>`;
+            };
+        });
+    </script>
+</body>
+</html>
